@@ -26,6 +26,7 @@ targetCompatibility = 1.8
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.springframework:spring-jdbc")
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("com.maxmind.geoip2:geoip2:2.3.1")
     runtime('mysql:mysql-connector-java:5.1.13')
 }
