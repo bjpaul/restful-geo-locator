@@ -2,15 +2,16 @@ package org.locator.geo.rest.response.util;
 
 import org.locator.geo.rest.response.dto.ErrorResponseDto;
 import org.locator.geo.rest.response.dto.SuccessResponseDto;
+import org.springframework.stereotype.Component;
 
+@Component
+public class HttpResponse {
 
-public class ResponseUtil {
-
-	public static SuccessResponseDto<Object> success(){
+	public SuccessResponseDto<Object> success(){
 		return new SuccessResponseDto<Object>();
 	}
 	
-	public static ErrorResponseDto error(){
+	public ErrorResponseDto error(){
 		return new ErrorResponseDto();
 	}
 }

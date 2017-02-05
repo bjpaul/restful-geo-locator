@@ -2,9 +2,9 @@ package org.locator.geo.rest.controller;
 
 
 import org.locator.geo.rest.request.dto.LocationList;
-import org.locator.geo.rest.request.util.Http;
+import org.locator.geo.rest.request.util.HttpRequest;
 import org.locator.geo.rest.response.dto.AbstractResponseDto;
-import org.locator.geo.rest.response.util.ResponseUtil;
+import org.locator.geo.rest.response.util.HttpResponse;
 import org.locator.geo.rest.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -22,7 +22,10 @@ public class LocationController {
 	private LocationService locationService;
 	
 	@Autowired
-	private Http http;
+	private HttpRequest httpRequest;
+	
+	@Autowired
+	private HttpResponse httpResponse;
 	
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public HttpEntity<AbstractResponseDto> search(
@@ -30,14 +33,14 @@ public class LocationController {
     		@RequestParam(name="lng", required=false) Double lng,
     		@RequestParam(name="q", required=false) String keyword)  {
     	try{
-    		String ip = http.getClientIP();
+    		String ip = httpRequest.getClientIP();
     		
 	    	LocationList list = locationService.geoLocation(lat, lng, keyword, ip);
 	    	
 	    	if(list != null){
-	    		return ResponseUtil.success().body(list).message("Location list fetched successfully !!!").send(HttpStatus.OK);
+	    		return httpResponse.success().body(list).message("Location list fetched successfully !!!").send(HttpStatus.OK);
 	    	}else{
-	    		return ResponseUtil.error().message("No data found !!!").send(HttpStatus.NOT_FOUND);
+	    		return httpResponse.error().message("No data found !!!").send(HttpStatus.NOT_FOUND);
 	    	}
     	}catch(Exception ex){
     		ex.printStackTrace();
