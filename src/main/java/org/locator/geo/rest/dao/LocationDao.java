@@ -5,12 +5,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.locator.geo.rest.config.GeoLocator;
 import org.locator.geo.rest.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,7 @@ import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.record.City;
 
-public class LocationDao implements GeoLocator{
+public class LocationDao implements GeoLocator, InitializingBean{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LocationDao.class);
 
@@ -66,12 +65,20 @@ public class LocationDao implements GeoLocator{
 						new Object[] { id }, Location.map());
 	}
 
-	@PostConstruct
 	private DatabaseReader reader() throws IOException {		
-		if (builder == null) {
-			logger.info("Building maxmind database reader");
-			builder = new DatabaseReader.Builder(maxDb.getInputStream()).build();
+		while (builder == null) {
+			synchronized(this){
+				if(builder == null){
+					logger.info("Building maxmind database reader");
+					builder = new DatabaseReader.Builder(maxDb.getInputStream()).build();
+				}
+			}
 		}
 		return builder;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		reader();
 	}
 }
