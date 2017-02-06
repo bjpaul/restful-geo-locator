@@ -1,9 +1,9 @@
-package org.locator.geo.rest.controller;
+package org.locator.geo.rest.http.controller;
 
 import org.locator.geo.rest.cache.CacheNames;
 import org.locator.geo.rest.cache.manage.LocalCacheManager;
-import org.locator.geo.rest.response.dto.AbstractResponseDto;
-import org.locator.geo.rest.response.util.HttpResponse;
+import org.locator.geo.rest.http.response.dto.AbstractResponseDto;
+import org.locator.geo.rest.http.response.util.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;

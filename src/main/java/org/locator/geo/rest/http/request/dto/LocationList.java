@@ -1,4 +1,4 @@
-package org.locator.geo.rest.request.dto;
+package org.locator.geo.rest.http.request.dto;
 
 import java.util.List;
 

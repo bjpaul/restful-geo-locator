@@ -1,10 +1,10 @@
-package org.locator.geo.rest.controller;
+package org.locator.geo.rest.http.controller;
 
 
-import org.locator.geo.rest.request.dto.LocationList;
-import org.locator.geo.rest.request.util.HttpRequest;
-import org.locator.geo.rest.response.dto.AbstractResponseDto;
-import org.locator.geo.rest.response.util.HttpResponse;
+import org.locator.geo.rest.http.request.dto.LocationList;
+import org.locator.geo.rest.http.request.util.HttpRequest;
+import org.locator.geo.rest.http.response.dto.AbstractResponseDto;
+import org.locator.geo.rest.http.response.util.HttpResponse;
 import org.locator.geo.rest.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

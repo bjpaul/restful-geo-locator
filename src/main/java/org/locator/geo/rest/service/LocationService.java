@@ -5,8 +5,8 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import org.locator.geo.rest.config.GeoLocator;
+import org.locator.geo.rest.http.request.dto.LocationList;
 import org.locator.geo.rest.model.Location;
-import org.locator.geo.rest.request.dto.LocationList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

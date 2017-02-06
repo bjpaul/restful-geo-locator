@@ -1,4 +1,4 @@
-package org.locator.geo.rest.request.util;
+package org.locator.geo.rest.http.request.util;
 
 import javax.servlet.http.HttpServletRequest;
 
