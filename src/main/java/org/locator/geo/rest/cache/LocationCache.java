@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import org.locator.geo.rest.config.LocationProvider;
+import org.locator.geo.rest.config.GeoLocator;
 import org.locator.geo.rest.model.Location;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.record.City;
 
-public class LocationCache implements LocationProvider{
+public class LocationCache implements GeoLocator{
 	
-	private LocationProvider provider;
+	private GeoLocator provider;
 
-	public LocationCache(LocationProvider provider) {
+	public LocationCache(GeoLocator provider) {
 		super();
 		this.provider = provider;
 	}

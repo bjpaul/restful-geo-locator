@@ -23,7 +23,7 @@ public class LocationConfig {
 	private JdbcTemplate jdbcTemplate;
 
 	@Bean
-	public LocationProvider provider() throws IOException{
+	public GeoLocator provider() throws IOException{
 		return new LocationCache(new LocationDao(maxDb, jdbcTemplate));
 	}
 

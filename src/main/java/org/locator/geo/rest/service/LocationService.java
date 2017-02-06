@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import org.locator.geo.rest.config.LocationProvider;
+import org.locator.geo.rest.config.GeoLocator;
 import org.locator.geo.rest.model.Location;
 import org.locator.geo.rest.request.dto.LocationList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import com.maxmind.geoip2.record.City;
 public class LocationService {
 
 	@Autowired
-	private LocationProvider locationProvider;
+	private GeoLocator locationProvider;
 
 	public LocationList geoLocation(Double lat, Double lng, String keyword, String ip) throws UnknownHostException,
 			IOException, GeoIp2Exception {
