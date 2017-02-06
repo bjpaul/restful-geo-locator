@@ -10,9 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.AbstractCacheManager;
-import org.springframework.stereotype.Component;
 
-@Component("localCache")
 public class LocalCacheManager extends AbstractCacheManager{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LocalCacheManager.class);
