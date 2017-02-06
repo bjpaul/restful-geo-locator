@@ -13,36 +13,36 @@ import com.maxmind.geoip2.record.City;
 
 public class LocationCache implements GeoLocator{
 	
-	private GeoLocator provider;
+	private GeoLocator locator;
 
-	public LocationCache(GeoLocator provider) {
+	public LocationCache(GeoLocator locator) {
 		super();
-		this.provider = provider;
+		this.locator = locator;
 	}
 
 	@Cacheable(value=CacheNames.KEYWORD, condition="#keyword.length() < 4")
 	@Override
 	public List<Location> findByKeyword(String keyword) {
-		return provider.findByKeyword(keyword);
+		return locator.findByKeyword(keyword);
 	}
 
 	@Cacheable(value=CacheNames.LATLNG, keyGenerator="coordinatesKey")
 	@Override
 	public List<Location> findByCoordinates(Double latitude, Double longitude) {
-		return provider.findByCoordinates(latitude, longitude);
+		return locator.findByCoordinates(latitude, longitude);
 	}
 
 	@Cacheable(value=CacheNames.IP)
 	@Override
 	public City findByIP(String ip) throws UnknownHostException, IOException,
 			GeoIp2Exception {
-		return provider.findByIP(ip);
+		return locator.findByIP(ip);
 	}
 
 	@Cacheable(value=CacheNames.GEOID)
 	@Override
 	public List<Location> findByGeoLocationId(Integer id) {
-		return provider.findByGeoLocationId(id);
+		return locator.findByGeoLocationId(id);
 	}
 
 }
