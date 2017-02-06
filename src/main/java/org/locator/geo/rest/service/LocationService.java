@@ -31,9 +31,7 @@ public class LocationService {
 		 * maxmind implementation
 		 */
 		if ((lat == null || lat == 0) && (keyword == null || keyword.trim().equals(""))) {
-			
-			City city = locationProvider.findByIP(ip);
-			locations = locationProvider.findByGeoLocationId(city.getGeoNameId());
+			locations = geoLocationByIp(ip);
 		}
 		
 		/*
@@ -53,5 +51,10 @@ public class LocationService {
 		}
 
 		return LocationList.show(locations, ip);
+	}
+	
+	private List<Location> geoLocationByIp(String ip) throws UnknownHostException, IOException, GeoIp2Exception{
+		City city = locationProvider.findByIP(ip);
+		return locationProvider.findByGeoLocationId(city.getGeoNameId());
 	}
 }
