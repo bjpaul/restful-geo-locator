@@ -2,7 +2,7 @@ package org.locator.geo.rest.response.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "code", "status", "data", "message" })
+@JsonPropertyOrder({ "code", "status","message", "data" })
 public class SuccessResponseDto<T> extends AbstractResponseDto {
 
 	private T data;

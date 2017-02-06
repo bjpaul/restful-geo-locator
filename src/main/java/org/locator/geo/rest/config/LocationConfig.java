@@ -1,7 +1,6 @@
 package org.locator.geo.rest.config;
 
 import java.io.IOException;
-
 import org.locator.geo.rest.cache.LocationCache;
 import org.locator.geo.rest.dao.LocationDao;
 import org.springframework.beans.factory.annotation.Autowired;
