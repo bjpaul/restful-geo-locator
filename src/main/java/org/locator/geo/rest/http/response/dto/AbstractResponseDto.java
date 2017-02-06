@@ -1,4 +1,4 @@
-package org.locator.geo.rest.response.dto;
+package org.locator.geo.rest.http.response.dto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

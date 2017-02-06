@@ -1,7 +1,7 @@
-package org.locator.geo.rest.response.util;
+package org.locator.geo.rest.http.response.util;
 
-import org.locator.geo.rest.response.dto.ErrorResponseDto;
-import org.locator.geo.rest.response.dto.SuccessResponseDto;
+import org.locator.geo.rest.http.response.dto.ErrorResponseDto;
+import org.locator.geo.rest.http.response.dto.SuccessResponseDto;
 import org.springframework.stereotype.Component;
 
 @Component
