@@ -17,7 +17,7 @@ import com.maxmind.geoip2.record.City;
 public class LocationService {
 
 	@Autowired
-	private GeoLocator locationProvider;
+	private GeoLocator locator;
 
 	public LocationList geoLocation(Double lat, Double lng, String keyword, String ip) throws UnknownHostException,
 			IOException, GeoIp2Exception {
@@ -39,7 +39,7 @@ public class LocationService {
 		 * if keyword found
 		 */
 		else if (keyword != null && !keyword.trim().equals("")) {
-			locations = locationProvider.findByKeyword(keyword);
+			locations = locator.findByKeyword(keyword);
 		}
 		
 		/*
@@ -47,14 +47,14 @@ public class LocationService {
 		 * if co-ordinates found
 		 */
 		else {
-			locations = locationProvider.findByCoordinates(lat, lng);
+			locations = locator.findByCoordinates(lat, lng);
 		}
 
 		return LocationList.show(locations, ip);
 	}
 	
 	private List<Location> geoLocationByIp(String ip) throws UnknownHostException, IOException, GeoIp2Exception{
-		City city = locationProvider.findByIP(ip);
-		return locationProvider.findByGeoLocationId(city.getGeoNameId());
+		City city = locator.findByIP(ip);
+		return locator.findByGeoLocationId(city.getGeoNameId());
 	}
 }
