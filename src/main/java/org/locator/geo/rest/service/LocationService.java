@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 
-
-import org.locator.geo.rest.dao.LocationDao;
+import org.locator.geo.rest.config.LocationProvider;
 import org.locator.geo.rest.model.Location;
 import org.locator.geo.rest.request.dto.LocationList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import com.maxmind.geoip2.record.City;
 public class LocationService {
 
 	@Autowired
-	private LocationDao locationDao;
+	private LocationProvider locationProvider;
 
 	public LocationList geoLocation(Double lat, Double lng, String keyword, String ip) throws UnknownHostException,
 			IOException, GeoIp2Exception {
@@ -31,11 +30,10 @@ public class LocationService {
 		 * 
 		 * maxmind implementation
 		 */
-		if ((lat == null || lat == 0)
-				&& (keyword == null || keyword.trim().equals(""))) {
+		if ((lat == null || lat == 0) && (keyword == null || keyword.trim().equals(""))) {
 			
-			City city = locationDao.findByIP(ip);
-			locations = locationDao.findByGeoLocationId(city.getGeoNameId());
+			City city = locationProvider.findByIP(ip);
+			locations = locationProvider.findByGeoLocationId(city.getGeoNameId());
 		}
 		
 		/*
@@ -43,7 +41,7 @@ public class LocationService {
 		 * if keyword found
 		 */
 		else if (keyword != null && !keyword.trim().equals("")) {
-			locations = locationDao.findByKeyword(keyword);
+			locations = locationProvider.findByKeyword(keyword);
 		}
 		
 		/*
@@ -51,7 +49,7 @@ public class LocationService {
 		 * if co-ordinates found
 		 */
 		else {
-			locations = locationDao.findByCoordinates(lat, lng);
+			locations = locationProvider.findByCoordinates(lat, lng);
 		}
 
 		return LocationList.show(locations, ip);
