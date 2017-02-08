@@ -1,6 +1,7 @@
 package org.locator.geo.rest.config;
 
 import java.io.IOException;
+import org.locator.geo.rest.cache.BootstrapLocation;
 import org.locator.geo.rest.dao.LocationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +21,13 @@ public class LocationConfig {
 
 	@Bean
 	public GeoLocator provider() throws IOException{
-		return new LocationDao(maxDb, jdbcTemplate);
+		return new BootstrapLocation((new LocationDao(maxDb, jdbcTemplate)), botstrapDao());
+	}
+
+	
+	@Bean
+	public BootstrapLocationDao botstrapDao(){
+		return new BootstrapLocationDao(jdbcTemplate);
 	}
 
 }
