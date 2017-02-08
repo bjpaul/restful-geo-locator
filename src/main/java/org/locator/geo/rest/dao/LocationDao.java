@@ -9,16 +9,14 @@ import org.locator.geo.rest.config.GeoLocator;
 import org.locator.geo.rest.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.record.City;
 
-public class LocationDao implements GeoLocator, InitializingBean{
+public class LocationDao implements GeoLocator{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LocationDao.class);
 
@@ -33,7 +31,6 @@ public class LocationDao implements GeoLocator, InitializingBean{
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public List<Location> findByKeyword(String keyword) {
 		logger.info("Fetching result by keyword :: "+keyword);
@@ -41,7 +38,6 @@ public class LocationDao implements GeoLocator, InitializingBean{
 				new Object[] { keyword }, Location.map());
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public List<Location> findByCoordinates(Double latitude, Double longitude) {
 		logger.info("Fetching result by lat&lng :: "+latitude+", "+longitude);
@@ -56,7 +52,6 @@ public class LocationDao implements GeoLocator, InitializingBean{
 		return reader().city(InetAddress.getByName(ip)).getCity();
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public List<Location> findByGeoLocationId(Integer id) {
 		logger.info("Fetching result by city geoname id :: "+id);
@@ -79,6 +74,7 @@ public class LocationDao implements GeoLocator, InitializingBean{
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		logger.info("LocationDao :: after property set");
 		reader();
 	}
 }

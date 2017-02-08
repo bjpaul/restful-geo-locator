@@ -6,12 +6,15 @@ import java.util.List;
 
 import org.locator.geo.rest.config.GeoLocator;
 import org.locator.geo.rest.model.Location;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.record.City;
 
 public class LocationCache implements GeoLocator{
+	private static final Logger logger = LoggerFactory.getLogger(LocationCache.class);
 	
 	private GeoLocator locator;
 
@@ -45,4 +48,9 @@ public class LocationCache implements GeoLocator{
 		return locator.findByGeoLocationId(id);
 	}
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		locator.afterPropertiesSet();
+		logger.info("LocationCache :: after property set");
+	}
 }
