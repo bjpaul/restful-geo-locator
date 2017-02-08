@@ -26,26 +26,11 @@ public class BootstrapLocation implements InitializingBean{
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		
-		Thread thread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				logger.info("Bootstrap :: Coordinates");
-				bootstrapCoordinates();
-				
-				logger.info("Bootstrap :: Keywords");
-				bootstrapKeywords();
-				
-			}
-		});
+		logger.info("Bootstrap :: Coordinates");
+		bootstrapCoordinates();
 		
-		thread.start();
+		logger.info("Bootstrap :: Keywords");
+		bootstrapKeywords();
 		
 	}
 
